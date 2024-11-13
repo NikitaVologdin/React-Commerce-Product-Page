@@ -31,7 +31,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://github.com/NikitaVologdin/React-Commerce-Product-Page](https://github.com/NikitaVologdin/React-Commerce-Product-Page)
-- Live Site URL: [https://react-commerce-product-page-ihbf.vercel.app/](https://react-commerce-product-page-ihbf.vercel.app/)
+- Live Site URL: [https://react-commerce-product-page.vercel.app/](https://react-commerce-product-page.vercel.app/)
 
 ### Built with
 
