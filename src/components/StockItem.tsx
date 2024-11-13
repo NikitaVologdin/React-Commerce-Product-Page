@@ -39,7 +39,7 @@ export default function StockItem({ stockItem }: IStockItemProps) {
           <h1 className="stock-item__title">{title}</h1>
           <p className="stock-item__paragraph">{description}</p>
           <div className="stock-item__info">
-            <span className="stock-item__price">{price.toFixed(2)}</span>
+            <span className="stock-item__price">${price.toFixed(2)}</span>
             {discount ? (
               <span className="stock-item__discount">{discount}%</span>
             ) : (
