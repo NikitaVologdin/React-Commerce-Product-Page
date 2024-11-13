@@ -186,11 +186,14 @@
   &__item {
     list-style: none;
   }
-  &__emptty {
+  &__empty {
     font-size: 16px;
     line-height: 24px;
     font-weight: 700;
     color: var(--dark-grayish-blue);
+    list-style: none;
+    text-align: center;
+    padding: 20px 0;
   }
 }
 
@@ -458,7 +461,7 @@
     min-width: auto;
     width: 360px;
     top: 15%;
-    left: calc((50% - 22rem) + 550px + 8rem);
+    left: calc((50% - 22rem) + 550px + 4.5rem);
     position: sticky;
     box-shadow: var(--black) 0px 0px 2px 0px;
     &::backdrop {

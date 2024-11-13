@@ -51,7 +51,7 @@ export default function Cart({ isCartOpen, setIsCartOpen, items }: ICartProps) {
             return <CartItem item={item} key={item.id} />;
           })
         ) : (
-          <p className="cart-list__empty">Your cart is empty.</p>
+          <li className="cart-list__empty">Your cart is empty.</li>
         )}
       </ul>
       <button className="cart__checkout">checkout</button>

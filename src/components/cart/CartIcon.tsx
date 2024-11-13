@@ -43,7 +43,9 @@ export default function CartIcon({
       animate={{ scale: addedToCart ? 1.1 : 1 }}
     >
       {icon}
-      <span className="cart-icon__amount">{amount}</span>
+      {amount > 0 ? (
+        <output className="cart-icon__amount">{amount}</output>
+      ) : null}
     </motion.button>
   );
 }
