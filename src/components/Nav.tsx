@@ -1,23 +1,24 @@
 import { type INavProps } from "../types/nav";
+import { Link } from "react-router-dom";
 
 export default function Nav({ isMenuOpen }: INavProps) {
   return (
     <nav className={`header__nav nav ${isMenuOpen ? "nav_open" : ""}`}>
       <ul className="nav__list nav-list">
         <li className="nav-list__item">
-          <a href="/collections">Collections</a>
+          <Link to="/collections">Collections</Link>
         </li>
         <li className="nav-list__item">
-          <a href="/men">Men</a>
+          <Link to="/men">Men</Link>
         </li>
         <li className="nav-list__item">
-          <a href="/women">Women</a>
+          <Link to="/women">Women</Link>
         </li>
         <li className="nav-list__item">
-          <a href="/about">About</a>
+          <Link to="/about">About</Link>
         </li>
         <li className="nav-list__item">
-          <a href="/contact">Contact</a>
+          <Link to="/contact">Contact</Link>
         </li>
       </ul>
     </nav>

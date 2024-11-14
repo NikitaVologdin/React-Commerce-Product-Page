@@ -3,28 +3,17 @@ import { type ICartItemProps } from "../../types/cart";
 import { cartContext } from "../../store/cart/CartContext";
 
 export default function CartItem({ item }: ICartItemProps) {
-  const { title, thumbnails, price, quantity, discount } = item;
-  function calculateTotal(
-    price: number,
-    quantity: number,
-    discount: number | null
-  ) {
-    if (discount) return (price * quantity * discount) / 100;
-    return price * quantity;
-  }
-  const total = calculateTotal(price, quantity, discount);
-  let cost;
-  if (discount) {
-    cost = (price * discount) / 100;
-  } else {
-    cost = price;
-  }
+  const { title, thumbnails, price, quantity } = item;
+  const total = price * quantity;
+
   const ctx = useContext(cartContext);
+
   function removeFromCartHandler() {
     ctx.removeItemFromCart(item);
   }
+
   return (
-    <li className="cart-list__item cart-item">
+    <li className={"cart-list__item cart-item"}>
       <img
         className="cart-item__img"
         src={thumbnails[0]}
@@ -35,7 +24,7 @@ export default function CartItem({ item }: ICartItemProps) {
       <div className="cart-item__info">
         <h3 className="cart-item__title">{title}</h3>
         <p className="cart-item__paragraph">
-          {`${cost} x ${quantity} `}
+          {`${price} x ${quantity} `}
           <span className="cart-item__paragraph_total"> ${total}</span>
         </p>
       </div>

@@ -1,15 +1,26 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { type ICartProps, type ICartItem } from "../../types/cart";
 import CartItem from "./CartItem";
+import useScreenSize from "../../hooks/useScreenSize";
 
 export default function Cart({ isCartOpen, setIsCartOpen, items }: ICartProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const screenSize = useScreenSize();
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
-    if (isCartOpen) return dialogRef.current?.showModal();
+    if (screenSize.width >= 1100) return setIsMobile(false);
+  }, [screenSize.width]);
+
+  useEffect(() => {
+    if (isMobile) {
+      if (isCartOpen) return dialogRef.current?.showModal();
+    } else {
+      if (isCartOpen) return dialogRef.current?.show();
+    }
     return dialogRef.current?.close();
-  }, [isCartOpen]);
+  }, [isCartOpen, isMobile]);
 
   const isCartNotEmpty = items.length;
 
@@ -39,7 +50,7 @@ export default function Cart({ isCartOpen, setIsCartOpen, items }: ICartProps) {
 
   return createPortal(
     <dialog
-      className={"header__cart cart"}
+      className={`header__cart cart ${!isMobile ? "cart_desktop" : ""}`}
       ref={dialogRef}
       onClick={closeDialogHandler}
     >
