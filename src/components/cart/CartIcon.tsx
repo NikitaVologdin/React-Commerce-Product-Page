@@ -1,24 +1,16 @@
-import { useEffect, useState } from "react";
 import { type ICartIconProps } from "../../types/cart";
-import { motion } from "motion/react";
+import useAnimate from "../../hooks/useAnimate";
 
 export default function CartIcon({
   isCartOpen,
   setIsCartOpen,
   amount,
 }: ICartIconProps) {
-  const [addedToCart, setAddedToCart] = useState(false);
+  const animateAmount = useAnimate(amount, 500);
 
   function openCartHandler() {
     setIsCartOpen(true);
   }
-
-  useEffect(() => {
-    setAddedToCart(true);
-    setTimeout(() => {
-      setAddedToCart(false);
-    }, 300);
-  }, [amount]);
 
   const icon = (
     <svg
@@ -36,16 +28,15 @@ export default function CartIcon({
   );
 
   return (
-    <motion.button
+    <button
       aria-label={isCartOpen ? "Close cart" : "Open cart"}
       onClick={openCartHandler}
-      className="header__cart-icon cart-icon"
-      animate={{ scale: addedToCart ? 1.1 : 1 }}
+      className={`header__cart-icon cart-icon ${animateAmount && "pulse"}`}
     >
       {icon}
       {amount > 0 ? (
         <output className="cart-icon__amount">{amount}</output>
       ) : null}
-    </motion.button>
+    </button>
   );
 }
