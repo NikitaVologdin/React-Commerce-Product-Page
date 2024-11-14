@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { type ICartIconProps } from "../../types/cart";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export default function CartIcon({
   isCartOpen,
