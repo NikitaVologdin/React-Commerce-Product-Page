@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { type ICartIconProps } from "../../types/cart";
 import { useEffect, useState } from "react";
 

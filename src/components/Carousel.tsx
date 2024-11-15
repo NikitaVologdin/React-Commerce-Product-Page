@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useLayoutEffect } from "react";
 import { IStockItem } from "../types/stock";
 import Thumbnails from "./thumbnails/Thumbnails";
 import { galleryContext } from "../store/gallery/galleryContext";
@@ -11,57 +11,24 @@ interface ICarouselProps {
 
 export default function Carousel({ item }: ICarouselProps) {
   const [imageIndex, setImageIndex] = useState(0);
+  const [position, setPosition] = useState(0);
   const [canClick, setCanClick] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const screenSize = useScreenSize();
   const images = item.img;
-  const image = images[imageIndex];
   const galleryCTX = useContext(galleryContext);
 
   function previousImageHandler() {
-    // function updateThumbnails(imageIndex: number, images: string[]) {
-    //   function getPrevImageIndex(imageIndex: number) {
-    //     if (imageIndex === item.thumbnails.length - 1) return 0;
-    //     return imageIndex + 1;
-    //   }
-    //   const prevImageIndex = getPrevImageIndex(imageIndex);
-    //   const result = [...images];
-    //   result.splice(thumbnails.length - 1, 1);
-    //   result.unshift(item.thumbnails[prevImageIndex]);
-    //   return setThumbnails(result);
-    // }
-
-    // function getImageIndexState() {
-    //   if (imageIndex === 0) return images.length - 1;
-    //   return imageIndex - 1;
-    // }
-
     setImageIndex((prev) => {
       if (prev === 0) return images.length - 1;
       return prev - 1;
     });
-
-    // const imageStateIndex = getImageIndexState();
-    // updateThumbnails(imageStateIndex, thumbnails);
   }
   function nextImageHandler() {
-    // function updateThumbnails(imageIndex: number, images: string[]) {
-    //   function getPrevImageIndex(imageIndex: number) {
-    //     if (imageIndex === 0) return item.thumbnails.length;
-    //     return imageIndex - 1;
-    //   }
-    //   const prevImageIndex = getPrevImageIndex(imageIndex);
-    //   const result = [...images];
-    //   result.splice(0, 1);
-    //   result.push(item.thumbnails[prevImageIndex]);
-    //   return setThumbnails(result);
-    // }
-
     setImageIndex((prev) => {
       if (prev === images.length - 1) return 0;
       return prev + 1;
     });
-
-    // updateThumbnails(imageIndex + 1, thumbnails);
   }
   function openGalleryHandler() {
     galleryCTX.onShowImageInGallery(imageIndex);
@@ -71,9 +38,19 @@ export default function Carousel({ item }: ICarouselProps) {
   }
 
   useEffect(() => {
-    if (screenSize.width >= 1100) return setCanClick(true);
-    setCanClick(false);
+    if (screenSize.width < 1100) return setIsMobile(true);
+    setIsMobile(false);
   }, [screenSize]);
+
+  useEffect(() => {
+    if (!isMobile) return setCanClick(true);
+    setCanClick(false);
+  }, [screenSize, isMobile]);
+
+  useLayoutEffect(() => {
+    if (isMobile) return setPosition(imageIndex * 375);
+    setPosition(imageIndex * 445);
+  }, [imageIndex, isMobile]);
 
   return (
     <>
@@ -102,7 +79,24 @@ export default function Carousel({ item }: ICarouselProps) {
                   }
             }
           >
-            <img width={375} height={300} src={image} alt="" />
+            <div className="carousel-main__display">
+              <div
+                className="carousel-main__slides"
+                style={{ left: `-${position}px` }}
+              >
+                {item.img.map((src, index) => {
+                  return (
+                    <img
+                      width={375}
+                      height={300}
+                      src={src}
+                      alt=""
+                      key={Math.random() + index}
+                    />
+                  );
+                })}
+              </div>
+            </div>
           </button>
 
           <button

@@ -3,6 +3,7 @@ import { IGalleryProps } from "../types/gallery";
 import { useContext, useState, useEffect } from "react";
 import { galleryContext } from "../store/gallery/galleryContext";
 import Thumbnails from "./thumbnails/Thumbnails";
+import Carousel from "../components/Carousel";
 
 export default function Gallery({ item }: IGalleryProps) {
   const [imageIndex, setImageIndex] = useState(0);
@@ -52,7 +53,7 @@ export default function Gallery({ item }: IGalleryProps) {
 
   return createPortal(
     <dialog ref={galleryCTX.ref} className="stock-item__gallery gallery">
-      <div className="gallery__control">
+      {/* <div className="gallery__control">
         <button className="gallery__close" onClick={closeDialogHandler}>
           {closeIcon}
         </button>
@@ -83,14 +84,15 @@ export default function Gallery({ item }: IGalleryProps) {
             <img src="/images/icon-next.svg" alt="" aria-label="Next image" />
           </button>
         </div>
-      </div>
-      <Thumbnails
+      </div> */}
+      <Carousel item={item} />
+      {/* <Thumbnails
         images={item.thumbnails}
         title={item.title}
         imageIndex={imageIndex}
         id={item.id}
         onActiveImageHandler={setActiveImageHandler}
-      />
+      /> */}
     </dialog>,
     document.body
   );
