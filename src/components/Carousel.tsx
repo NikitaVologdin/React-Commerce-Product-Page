@@ -61,11 +61,7 @@ export default function Carousel({ item }: ICarouselProps) {
             onClick={previousImageHandler}
             aria-label="Show previous image"
           >
-            <img
-              src="/images/icon-previous.svg"
-              alt=""
-              aria-label="Previous image"
-            />
+            <img src="/images/icon-previous.svg" alt="" width={5} height={11} />
           </button>
 
           <button
@@ -104,7 +100,7 @@ export default function Carousel({ item }: ICarouselProps) {
             onClick={nextImageHandler}
             aria-label="Show next image"
           >
-            <img src="/images/icon-next.svg" alt="" />
+            <img src="/images/icon-next.svg" alt="" width={5} height={11} />
           </button>
         </div>
       </div>

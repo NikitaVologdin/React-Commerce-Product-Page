@@ -66,12 +66,9 @@ export default function Gallery({ item }: IGalleryProps) {
           <button
             className="carousel-main__control carousel-main__control_left"
             onClick={previousImageHandler}
+            aria-label="Previous image"
           >
-            <img
-              src="/images/icon-previous.svg"
-              alt=""
-              aria-label="Previous image"
-            />
+            <img src="/images/icon-previous.svg" alt="" width={8} height={16} />
           </button>
 
           <div className="carousel-main__display">
@@ -95,8 +92,9 @@ export default function Gallery({ item }: IGalleryProps) {
           <button
             className="carousel-main__control carousel-main__control_right"
             onClick={nextImageHandler}
+            aria-label="Next image"
           >
-            <img src="/images/icon-next.svg" alt="" aria-label="Next image" />
+            <img src="/images/icon-next.svg" alt="" width={8} height={16} />
           </button>
         </div>
       </div>

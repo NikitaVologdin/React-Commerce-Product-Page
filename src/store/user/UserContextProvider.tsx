@@ -5,7 +5,7 @@ export default function UserContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const user = { avatar: "/images/image-avatar.png" };
+  const user = { avatar: "/images/image-avatar.webp" };
 
   return <userContext.Provider value={user}>{children}</userContext.Provider>;
 }
