@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { type ICartItemProps } from "../../types/cart";
 import { cartContext } from "../../store/cart/CartContext";
+import { motion } from "framer-motion";
 
 export default function CartItem({ item }: ICartItemProps) {
   const { title, thumbnails, price, quantity } = item;
@@ -13,7 +14,12 @@ export default function CartItem({ item }: ICartItemProps) {
   }
 
   return (
-    <li className={"cart-list__item cart-item"}>
+    <motion.li
+      className={"cart-list__item cart-item"}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
       <img
         className="cart-item__img"
         src={thumbnails[0]}
@@ -41,6 +47,6 @@ export default function CartItem({ item }: ICartItemProps) {
           height={16}
         />
       </button>
-    </li>
+    </motion.li>
   );
 }

@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { type ICartProps, type ICartItem } from "../../types/cart";
 import CartItem from "./CartItem";
 import useScreenSize from "../../hooks/useScreenSize";
+import { AnimatePresence } from "framer-motion";
 
 export default function Cart({ isCartOpen, setIsCartOpen, items }: ICartProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -58,9 +59,11 @@ export default function Cart({ isCartOpen, setIsCartOpen, items }: ICartProps) {
       <div className="cart__hr"></div>
       <ul className="cart__list cart-list">
         {isCartNotEmpty ? (
-          items.map((item: ICartItem) => {
-            return <CartItem item={item} key={item.id} />;
-          })
+          <AnimatePresence>
+            {items.map((item: ICartItem) => {
+              return <CartItem item={item} key={item.id} />;
+            })}
+          </AnimatePresence>
         ) : (
           <li className="cart-list__empty">Your cart is empty.</li>
         )}
