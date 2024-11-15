@@ -1,15 +1,14 @@
 import { createPortal } from "react-dom";
 import { IGalleryProps } from "../types/gallery";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useLayoutEffect } from "react";
 import { galleryContext } from "../store/gallery/galleryContext";
 import Thumbnails from "./thumbnails/Thumbnails";
-import Carousel from "../components/Carousel";
 
 export default function Gallery({ item }: IGalleryProps) {
   const [imageIndex, setImageIndex] = useState(0);
+  const [position, setPosition] = useState(0);
   const galleryCTX = useContext(galleryContext);
   const images = item.img;
-  const image = images[imageIndex];
 
   function previousImageHandler() {
     setImageIndex((prev) => {
@@ -47,13 +46,17 @@ export default function Gallery({ item }: IGalleryProps) {
     galleryCTX.onCloseImageGallery();
   }
 
+  useLayoutEffect(() => {
+    setPosition(imageIndex * 550);
+  }, [imageIndex]);
+
   useEffect(() => {
     setImageIndex(galleryCTX.imageIndex);
   }, [galleryCTX.imageIndex]);
 
   return createPortal(
     <dialog ref={galleryCTX.ref} className="stock-item__gallery gallery">
-      {/* <div className="gallery__control">
+      <div className="gallery__control">
         <button className="gallery__close" onClick={closeDialogHandler}>
           {closeIcon}
         </button>
@@ -70,13 +73,25 @@ export default function Gallery({ item }: IGalleryProps) {
               aria-label="Previous image"
             />
           </button>
-          <img
-            className="gallery__main-img"
-            width={375}
-            height={300}
-            src={image}
-            alt=""
-          />
+
+          <div className="carousel-main__display">
+            <div
+              className="carousel-main__slides"
+              style={{ left: `-${position}px` }}
+            >
+              {item.img.map((src, index) => {
+                return (
+                  <img
+                    width={550}
+                    height={550}
+                    src={src}
+                    alt=""
+                    key={Math.random() + index}
+                  />
+                );
+              })}
+            </div>
+          </div>
           <button
             className="carousel-main__control carousel-main__control_right"
             onClick={nextImageHandler}
@@ -84,15 +99,14 @@ export default function Gallery({ item }: IGalleryProps) {
             <img src="/images/icon-next.svg" alt="" aria-label="Next image" />
           </button>
         </div>
-      </div> */}
-      <Carousel item={item} />
-      {/* <Thumbnails
+      </div>
+      <Thumbnails
         images={item.thumbnails}
         title={item.title}
         imageIndex={imageIndex}
         id={item.id}
         onActiveImageHandler={setActiveImageHandler}
-      /> */}
+      />
     </dialog>,
     document.body
   );

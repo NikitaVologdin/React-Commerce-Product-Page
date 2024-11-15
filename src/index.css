@@ -654,6 +654,15 @@ dialog {
   }
 }
 
+.gallery .carousel-main__display {
+  overflow: hidden;
+  border-radius: 15px;
+}
+.gallery .carousel-main__slides {
+  width: 550px;
+  height: 550px;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
