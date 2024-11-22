@@ -670,6 +670,7 @@ dialog {
       }
       &_selected {
         border-color: var(--orange);
+        filter: opacity(60%);
       }
     }
   }
