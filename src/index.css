@@ -116,7 +116,7 @@
     font-size: 18px;
     line-height: 26px;
     & a {
-      color: var(--very-dark-blue);
+      color: var(--dark-grayish-blue);
       text-decoration: none;
     }
   }
@@ -539,7 +539,7 @@ dialog {
   }
   .nav-list {
     flex-direction: row;
-    /* gap: 32px; */
+    gap: 4px;
     &__item {
       display: inline-block;
       text-align: center;
@@ -575,9 +575,11 @@ dialog {
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
+      padding: 0;
     }
     &__info {
       flex-wrap: wrap;
+      margin-top: 12px;
     }
     &__previousPrice {
       width: 100%;
