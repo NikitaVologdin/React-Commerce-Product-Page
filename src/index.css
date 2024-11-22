@@ -466,6 +466,9 @@ dialog {
       background-color: var(--light-grayish-blue);
       margin-bottom: 90px;
     }
+    &__main {
+      padding: 0 50px;
+    }
   }
   .header {
     padding: 0;
@@ -578,6 +581,7 @@ dialog {
     }
     &__previousPrice {
       width: 100%;
+      margin-top: 10px;
     }
     &__controls {
       display: flex;
@@ -617,6 +621,10 @@ dialog {
     &__controls {
       margin-top: 32px;
     }
+  }
+
+  .amount-controller {
+    padding: 12px 18px;
   }
 
   .carousel-main {
