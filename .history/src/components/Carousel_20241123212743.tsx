@@ -86,8 +86,8 @@ export default function Carousel({ item }: ICarouselProps) {
                       width={375}
                       height={300}
                       src={`/images/sm/${src}`}
-                      srcSet={`/images/sm/${src} 400w, /images/md/${src} 660w`}
-                      sizes="(max-width: 1100px) 400px, (min-width: 1100px) 660px"
+                      srcSet={`/images/sm/${src} x1, /images/md/${src} x2`}
+                      sizes="(max-width: 1100px) x1, (min-width: 1100px) x2"
                       alt=""
                       key={Math.random() + index}
                     />

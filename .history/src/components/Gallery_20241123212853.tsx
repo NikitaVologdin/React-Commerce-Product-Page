@@ -84,7 +84,6 @@ export default function Gallery({ item }: IGalleryProps) {
                     src={`/images/lg/${src}`}
                     alt=""
                     key={Math.random() + index}
-                    loading="lazy"
                   />
                 );
               })}
